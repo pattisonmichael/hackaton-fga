@@ -1,0 +1,44 @@
+{
+    "date": "2022-09-13T20:37:53.057Z",
+    "type": "sapi",
+    "description": "Assign users to a role",
+    "client_id": "IRyoOoQxPhmdxIr_K_fv-MtDtGj8R8uL",
+    "client_name": "",
+    "ip": "35.166.202.113",
+    "user_agent": "Chrome 105.0.0 / Mac OS X 10.15.7",
+    "details": {
+      "request": {
+        "method": "post",
+        "path": "/api/v2/roles/rol_99SMnYdy6mILoSFJ/users",
+        "query": {},
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
+        "body": {
+          "users": [
+            "auth0|6113fe503ee95c0069d42db9"
+          ]
+        },
+        "channel": "https://manage.auth0.com/",
+        "ip": "35.166.202.113",
+        "auth": {
+          "user": {
+            "user_id": "samlp|okta|andres.aguiar@auth0.com",
+            "name": "Andres Aguiar",
+            "email": "andres.aguiar@auth0.com"
+          },
+          "strategy": "jwt",
+          "credentials": {
+            "jti": "0bf2f30fec0754401e612c7ac2483ab0"
+          }
+        }
+      },
+      "response": {
+        "statusCode": 200,
+        "body": {}
+      }
+    },
+    "user_id": "samlp|okta|andres.aguiar@auth0.com",
+    "log_id": "90020220913203753432052803434693518631573819558067175602",
+    "_id": "90020220913203753432052803434693518631573819558067175602",
+    "isMobile": false,
+    "id": "90020220913203753432052803434693518631573819558067175602"
+  }
