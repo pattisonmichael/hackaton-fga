@@ -4,7 +4,8 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from contextlib import asynccontextmanager
 import openfga_sdk
-import asyncio
+import os
+from dotenv import load_dotenv
 from openfga_sdk import WriteRequest,TupleKeys,TupleKey
 from openfga_sdk.api import open_fga_api
 from openfga_sdk.credentials import Credentials, CredentialConfiguration
@@ -12,10 +13,13 @@ from typing import Any, Dict, List
 import json
 import re
 from pydantic import BaseModel, Field
-client_id = "0FStczHzsIMNEWcpTNd59vZfdy1Py9wk"
-client_secret ="R1QGcNkdXs-FQjE-W5EYQhlkeU8MRM6VL9sRmbS7aWVBe8ulnL8x-9yf8YY5aUSr"
-api_audience = "https://api.us1.fga.dev/"
-api_issuer = "fga.us.auth0.com"
+
+load_dotenv()
+client_id = os.environ.get("CLIENT_ID")
+client_secret = os.environ.get("CLIENT_SECRET")
+api_audience = os.environ.get("API_AUDIENCE")
+api_issuer = os.environ.get("API_ISSUER")
+
 
 pattern_user_role = r"^/api/v2/users/(.*?)/roles$"
 pattern_add_role = r"^/api/v2/roles/(.*?)/users$"
@@ -27,9 +31,9 @@ credentials = Credentials(method='client_credentials', configuration=CredentialC
 
 configuration = openfga_sdk.Configuration(
     api_scheme = 'https',
-    api_host = 'api.us1.fga.dev',
+    api_host = os.environ.get("API_HOST"),
     credentials = credentials,
-    store_id = "01GZE886BK7NC959XNE0DJ7PZE",
+    store_id = os.environ.get("STORE_ID"),
 )
 #configuration.debug=True
 
@@ -37,6 +41,7 @@ fga={}
 
 async def api_setup():
     # Enter a context with an instance of the API client
+    
     api_client = openfga_sdk.ApiClient(configuration)
         # Create an instance of the API class
     api_instance = open_fga_api.OpenFgaApi(api_client)
