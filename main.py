@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from contextlib import asynccontextmanager
 import openfga_sdk
 import os
+from urllib.parse import unquote
 from dotenv import load_dotenv
 from openfga_sdk import WriteRequest,TupleKeys,TupleKey
 from openfga_sdk.api import open_fga_api
@@ -91,7 +92,7 @@ async def create_log(request: Request):
             match_user_perm = re.match(pattern_user_perm,path)
             #match_del = re.match(pattern_delete_role,path)
             if (method=="post" and match_user and statuscode==204):
-                user=match_user.group(1)
+                user=unquote(match_user.group(1))
                 role=body["roles"][0]
                 print ("Add role " + role)
                 tuple = WriteRequest(
@@ -113,7 +114,7 @@ async def create_log(request: Request):
                     pass
 
             elif (method=="delete" and match_user and statuscode==204):
-                user=match_user.group(1)
+                user=unquote(match_user.group(1))
                 role=body["roles"][0]
                 print ("del role " + role)
                 tuple = WriteRequest(
@@ -227,7 +228,7 @@ async def create_log(request: Request):
                         pass
 
             elif (method=="post" and match_user_perm and statuscode==201):
-                user=match_user_perm.group(1)
+                user=unquote(match_user_perm.group(1))
                 perms=body["permissions"]
                 print ("Add perm to user " + user)
                 for perm in perms:
@@ -252,7 +253,7 @@ async def create_log(request: Request):
                         pass
 
             elif (method=="delete" and match_user_perm and statuscode==204):
-                user=match_user_perm.group(1)
+                user=unquote(match_user_perm.group(1))
                 perms=body["permissions"]
                 for perm in perms:
                     print ("remove perm from user " + str(perm))
